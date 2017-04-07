@@ -36,7 +36,7 @@ else {
 
   else {
       $_SESSION['logg_inn_sjekk'] = false;
-      header("location: index.php");
+      header("location: ../index.php");
   }
 
   mysql_close();
@@ -49,6 +49,7 @@ else {
   <head>
     <meta charset="utf-8">
     <title>Autentikasjonssystem</title>
+    <link href="../style/main.css" rel="stylesheet" type="text/css">
   </head>
   <body>
 

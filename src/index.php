@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <title>Autentikasjonssystem</title>
 
-    <link href="main.css" rel="stylesheet" type="text/css">
+    <link href="style/main.css" rel="stylesheet" type="text/css">
   </head>
   <body>
 
@@ -31,19 +31,18 @@
       session_destroy();
       }
     ?>
-
-    <form action="logg_inn.php" method="post">
+    <form action="./php/logg_inn.php" method="post">
       <label><strong>Brukernavn: </strong></label><br>
       <input type="text" name="l_brukernavn"><br><br>
       <label><strong>Passord: </strong></label><br>
-      <input type="l_password" name="l_passord"><br><br>
+      <input type="l_password" name="l_passord" type="password"><br><br>
       <button type="submit" name="login">Logg inn!</button>
     </form>
   </div>
 
   <div id="registrer_deg">
     <h2>Registrer deg <span class="r_lukk">(ÅPNE)</span></h2>
-    <form action="registrer_deg.php" method="post">
+    <form action="./php/registrer_deg.php" method="post">
       <label><strong>Brukernavn: </strong></label><br>
       <input type="text" name="r_brukernavn"><br><br>
       <label><strong>Passord: </strong></label><br>
@@ -53,6 +52,7 @@
     </form>
   </div>
 
-  <script type="text/javascript" src="passordstyrke.js"></script>
+  <script type="text/javascript" src="js/passordstyrke.js"></script>
+  <script type="text/javascript" src="js/form.js"></script>
   </body>
 </html>

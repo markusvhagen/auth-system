@@ -20,7 +20,7 @@
   </div>
 
   <div id="logg_inn">
-    <h2>Logg inn<span class="l_lukk">(LUKK)</span></h2>
+    <h2>Logg inn</h2>
 
     <?php
     // Hvis brukeren mislyktes med login vil denne kjøre
@@ -40,8 +40,16 @@
     </form>
   </div>
 
+  <div id="logg_inn_knapp">
+    <h4>Har du en bruker? <br> <span onclick="logginnAktiv()">Logg inn!</span></h4>
+  </div>
+
+  <div id="registrer_deg_knapp">
+    <h4>Har du ikke en bruker? <br> <span onclick="registrerAktiv()">Registrer deg!</span></h4>
+  </div>
+
   <div id="registrer_deg">
-    <h2>Registrer deg <span class="r_lukk">(ÅPNE)</span></h2>
+    <h2>Registrer deg</h2>
     <form action="./php/registrer_deg.php" method="post">
       <label><strong>Brukernavn: </strong></label><br>
       <input type="text" name="r_brukernavn"><br><br>

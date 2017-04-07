@@ -36,7 +36,7 @@ else {
 
   else {
       $_SESSION['logg_inn_sjekk'] = false;
-      header("location: ../index.php");
+      header("location: index.php");
   }
 
   mysql_close();

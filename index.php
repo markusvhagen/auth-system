@@ -32,7 +32,7 @@
       }
     ?>
 
-    <form action="logg_inn.php" method="post">
+    <form action="/logg_inn.php" method="post">
       <label><strong>Brukernavn: </strong></label><br>
       <input type="text" name="l_brukernavn"><br><br>
       <label><strong>Passord: </strong></label><br>
@@ -43,7 +43,7 @@
 
   <div id="registrer_deg">
     <h2>Registrer deg <span class="r_lukk">(ÅPNE)</span></h2>
-    <form action="registrer_deg.php" method="post">
+    <form action="/registrer_deg.php" method="post">
       <label><strong>Brukernavn: </strong></label><br>
       <input type="text" name="r_brukernavn"><br><br>
       <label><strong>Passord: </strong></label><br>

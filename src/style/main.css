@@ -13,12 +13,30 @@ body {
 }
 
 #logg_inn,
-#registrer_deg {
+#registrer_deg,
+#registrer_deg_knapp,
+#logg_inn_knapp {
   text-align: center;
 }
 
-.l_lukk,
-.r_lukk {
-  padding-left: 30px;
-  color: blue;
+
+#registrer_deg_knapp,
+#logg_inn {
+  display: block;
+}
+
+#logg_inn_knapp,
+#registrer_deg {
+  display: none;
+}
+
+#registrer_deg_knapp,
+#logg_inn_knapp {
+  cursor: pointer;
+}
+
+#registrer_deg_knapp span,
+#logg_inn_knapp span {
+  color: #3498db;
+  font-weight: bolder;
 }

@@ -1,5 +1,6 @@
 <?php
   session_start();
+  error_reporting(E_ERROR | E_WARNING | E_PARSE); // Ønsker ikke notice om at $_SESSION['logg_inn_sjekk'] ikke er satt.
 ?>
 
 <!DOCTYPE html>
@@ -46,10 +47,12 @@
       <label><strong>Brukernavn: </strong></label><br>
       <input type="text" name="r_brukernavn"><br><br>
       <label><strong>Passord: </strong></label><br>
-      <input type="password" name="r_passord"><br><br>
+      <input type="password" oninput="sjekk_styrke()" id="passord" name="r_passord"><br>
+      Passordstyrke: <b><span id="styrke"></span></b><br><br>
       <button type="submit" name="login">Registrer deg!</button>
     </form>
   </div>
 
+  <script type="text/javascript" src="passordstyrke.js"></script>
   </body>
 </html>

@@ -86,6 +86,7 @@ function sjekk_styrke() {
 
     /* Output-fase */
 
+
     if (lengde >= 1) {
       styrke_output.innerHTML = styrke_resultat;
     }

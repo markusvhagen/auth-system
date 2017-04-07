@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -17,7 +15,7 @@ else {
   mysql_select_db($dbname, $kontakt);
 
   $brukernavn = $_POST["l_brukernavn"];
-  $passord = $_POST["l_passord"];
+  $faktisk_passord = $_POST["l_passord"];
   // Spørringen under henter ut passordet for et gitt brukernavn.
   $sql = "SELECT passord FROM `auth-system-brukere` WHERE brukernavn='$brukernavn'";
 
@@ -30,15 +28,13 @@ else {
       $sql_passord = $resultat['passord'];
   }
 
-  if ($sql_passord == $passord) {
+  // Sjekker om hash stemmer overrens med passord.
+  if (password_verify($faktisk_passord, $sql_passord)) {
       echo "Du er nå logget inn!";
   }
 
   else {
-      if (isset($brukernavn) && isset($passord)) {
-        $_SESSION['logg_inn_sjekk'] = false;
-        header("location: ../index.php");
-      }
+        echo "Her har det skjedd noe feil. Du ble ikke logget inn. <a href='../index.php'>Gå tilbake</a>";
   }
 
   mysql_close();

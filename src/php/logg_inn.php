@@ -35,8 +35,10 @@ else {
   }
 
   else {
-      $_SESSION['logg_inn_sjekk'] = false;
-      header("location: ../index.php");
+      if (isset($brukernavn) && isset($passord)) {
+        $_SESSION['logg_inn_sjekk'] = false;
+        header("location: ../index.php");
+      }
   }
 
   mysql_close();

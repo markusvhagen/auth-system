@@ -1,3 +1,7 @@
+<?php
+  session_start();
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,6 +20,17 @@
 
   <div id="logg_inn">
     <h2>Logg inn<span class="l_lukk">(LUKK)</span></h2>
+
+    <?php
+    // Hvis brukeren mislyktes med login vil denne kjøre
+    if ($_SESSION['logg_inn_sjekk'] == false) {
+      echo "<b>Brukernavn og/eller passord er feil.</b> <br><br>";
+      // Fjerner variabelene, slik at en ny session vil utnytte seg av nye variabler.
+      unset($_SESSION['logg_inn_sjekk']);
+      session_destroy();
+      }
+    ?>
+
     <form action="logg_inn.php" method="post">
       <label><strong>Brukernavn: </strong></label><br>
       <input type="text" name="l_brukernavn"><br><br>

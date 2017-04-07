@@ -1,22 +1,27 @@
 <?php
+
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "auth-system";
 
-$brukernavn = $_POST["r_brukernavn"];
-$passord = $_POST["r_passord"];
-$sql = "INSERT INTO `auth-system-brukere`(brukernavn, passord) VALUES ('$brukernavn', '$passord')";
+if (isset($_POST["r_brukernavn"]) && isset($_POST["r_passord"])) {
+  $brukernavn = $_POST["r_brukernavn"];
+  // Lagrer passord som et resultat av bcrypt hashing-algoritme.
+  $passord = password_hash($_POST["r_passord"], PASSWORD_BCRYPT);
+  $sql = "INSERT INTO `auth-system-brukere`(brukernavn, passord) VALUES ('$brukernavn', '$passord')";
 
-mysql_connect($servername, $username, $password);
-mysql_select_db($dbname);
+  mysql_connect($servername, $username, $password);
+  mysql_select_db($dbname);
 
-if (mysql_connect($servername, $username, $password) === false) {
-    echo "Tilkobling mislyktes: " . $conn->connect_error;
+  mysql_query($sql);
+  echo "Registrering fullført. Velkommen!";
+  mysql_close();
+}
+else {
+  echo("Du må fylle ut begge feltene");
 }
 
-mysql_query($sql);
-mysql_close();
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +38,6 @@ mysql_close();
     <h1>Autentikasjonssytem</h1>
       <h4>Registrering</h4>
       <hr>
-      <p>Regsitrering fullført med brukernavn: <?php echo($brukernavn); ?> og passord <?php echo($passord) ?>. Passord er kun for testing</p>
   </div>
 
   </body>

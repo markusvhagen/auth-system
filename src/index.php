@@ -36,9 +36,10 @@
 
   <div id="registrer_deg">
     <h2>Registrer deg</h2>
-    <form action="./php/registrer_deg.php" method="post">
+    <form action="./php/registrer_deg.php" method="post" autocomplete="off">
       <label><strong>Brukernavn: </strong></label><br>
-      <input type="text" name="r_brukernavn"><br><br>
+      <input oninput="tilgjengeligBrukernavn(this.value)" type="text" id="brukernavn" name="r_brukernavn">
+      <br>Brukernavnet er <b><span id="brukernavnTilgjengelighet"></b></span><br><br>
       <label><strong>Passord: </strong></label><br>
       <input type="password" oninput="sjekk_styrke()" id="passord" name="r_passord"><br>
       Passordstyrke: <b><span id="styrke"></span></b><br><br>
@@ -48,5 +49,6 @@
 
   <script type="text/javascript" src="js/passordstyrke.js"></script>
   <script type="text/javascript" src="js/form.js"></script>
+  <script type="text/javascript" src="js/tilgjengeligBrukernavn.js"></script>
   </body>
 </html>

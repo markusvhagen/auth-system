@@ -7,19 +7,28 @@ $dbname = "auth-system";
 
 if (isset($_POST["r_brukernavn"]) && isset($_POST["r_passord"])) {
   $brukernavn = $_POST["r_brukernavn"];
-  // Lagrer passord som et resultat av bcrypt hashing-algoritme.
-  $passord = password_hash($_POST["r_passord"], PASSWORD_BCRYPT);
-  $sql = "INSERT INTO `auth-system-brukere`(brukernavn, passord) VALUES ('$brukernavn', '$passord')";
+  $brukernavnEksisterer = "SELECT brukernavn FROM `auth-system-brukere` WHERE brukernavn='$brukernavn'";
+  // Sjekker om brukernavn eksiterer i databasen.
+  if (mysql_num_rows($brukernavnEksisterer) > 0) {
+    // Lagrer passord som et resultat av bcrypt hashing-algoritme.
+    $passord = password_hash($_POST["r_passord"], PASSWORD_BCRYPT);
+    $sql = "INSERT INTO `auth-system-brukere`(brukernavn, passord) VALUES ('$brukernavn', '$passord')";
 
-  mysql_connect($servername, $username, $password);
-  mysql_select_db($dbname);
+    mysql_connect($servername, $username, $password);
+    mysql_select_db($dbname);
 
-  mysql_query($sql);
-  echo "Registrering fullført. Velkommen!";
-  mysql_close();
+    mysql_query($sql);
+    echo "Registrering fullført. Velkommen!";
+    mysql_close();
+  }
+
+  else {
+    echo "Brukernavnet er opptatt. Prøv et annet.";
+  }
 }
+
 else {
-  echo("Du må fylle ut begge feltene");
+  echo("Du må fylle ut alleiåi feltene");
 }
 
 ?>

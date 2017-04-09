@@ -4,41 +4,38 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "auth-system";
-$kontakt = mysql_connect($servername, $username, $password);
+$tilkobling = new PDO("mysql:host=$servername;dbname=$dbname", "$username", "$password");
 
-// Hvis det ikke er mulig å opprette en databasetilkobling.
-if (!$kontakt) {
-  echo "Mislyktes med databasetilkoblingen.";
+$brukernavn = $_POST["l_brukernavn"];
+$faktisk_passord = $_POST["l_passord"];
+
+// Spørringen under henter ut passordet for et gitt brukernavn.
+$loggInnQuery = "SELECT passord FROM `auth-system-brukere` WHERE brukernavn = ?";
+$loggInn = $tilkobling->prepare($loggInnQuery);
+$loggInn->execute(array($brukernavn));
+$sql_passord = $loggInn->fetchAll(PDO::FETCH_ASSOC);
+
+// Hvis brukeren eksiterer eller ikke.
+if (empty($sql_passord)) {
+  echo "Brukeren eksisterer ikke.";
+  die();
 }
 
+$sql_passord = array_values($sql_passord[0]);
+$passordSpoerring = password_verify($faktisk_passord, $sql_passord[0]);
+
+// Sjekker om hash stemmer overrens med passord.
+if ($passordSpoerring) {
+    echo "Du er nå logget inn!";
+}
+
+// Feil passord
 else {
-  mysql_select_db($dbname, $kontakt);
-
-  $brukernavn = $_POST["l_brukernavn"];
-  $faktisk_passord = $_POST["l_passord"];
-  // Spørringen under henter ut passordet for et gitt brukernavn.
-  $sql = "SELECT passord FROM `auth-system-brukere` WHERE brukernavn='$brukernavn'";
-
-  $forespoersel = mysql_query($sql);
-
-  // Hvis det faktisk eksisterer en forespørsel med spørringen over.
-  if ($forespoersel) {
-      // Disse to linjene gjør om resultatet fra spørringen til en lesbar streng.
-      $resultat = mysql_fetch_assoc($forespoersel);
-      $sql_passord = $resultat['passord'];
-  }
-
-  // Sjekker om hash stemmer overrens med passord.
-  if (password_verify($faktisk_passord, $sql_passord)) {
-      echo "Du er nå logget inn!";
-  }
-
-  else {
-        echo "Her har det skjedd noe feil. Du ble ikke logget inn. <a href='../index.php'>Gå tilbake</a>";
-  }
-
-  mysql_close();
+    echo "Feil passord. Du ble ikke logget inn. <a href='../index.php'>Gå tilbake</a> ";
 }
+
+// Kutter tilkoblingen til databasen
+$tilkobling = null;
 
 ?>
 

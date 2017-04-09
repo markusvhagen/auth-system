@@ -4,22 +4,21 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "auth-system";
+$tilkobling = new PDO("mysql:host=$servername;dbname=$dbname", "$username", "$password");
 
 if (isset($_POST["r_brukernavn"]) && isset($_POST["r_passord"])) {
   $brukernavn = $_POST["r_brukernavn"];
-  $brukernavnEksisterer = "SELECT brukernavn FROM `auth-system-brukere` WHERE brukernavn='$brukernavn'";
-  // Sjekker om brukernavn eksiterer i databasen.
-  if (mysql_num_rows($brukernavnEksisterer) > 0) {
+  $brukernavnEksistererQuery = "SELECT count(*) FROM `auth-system-brukere` WHERE brukernavn = ? LIMIT 1";
+  $brukernavnEksisterer = $tilkobling->prepare($brukernavnEksistererQuery);
+  $brukernavnEksisterer->execute(array($brukernavn));
+  if ($brukernavnEksisterer->fetchColumn() ? 'true' : 'false') {
     // Lagrer passord som et resultat av bcrypt hashing-algoritme.
     $passord = password_hash($_POST["r_passord"], PASSWORD_BCRYPT);
     $sql = "INSERT INTO `auth-system-brukere`(brukernavn, passord) VALUES ('$brukernavn', '$passord')";
 
-    mysql_connect($servername, $username, $password);
-    mysql_select_db($dbname);
-
-    mysql_query($sql);
+    $tilkobling->query($sql);
     echo "Registrering fullført. Velkommen!";
-    mysql_close();
+    $tilkobling = null;
   }
 
   else {
@@ -27,8 +26,9 @@ if (isset($_POST["r_brukernavn"]) && isset($_POST["r_passord"])) {
   }
 }
 
+
 else {
-  echo("Du må fylle ut alleiåi feltene");
+  echo("Du må fylle ut alle feltene");
 }
 
 ?>

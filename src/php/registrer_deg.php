@@ -11,7 +11,9 @@ if (isset($_POST["r_brukernavn"]) && isset($_POST["r_passord"])) {
   $brukernavnEksistererQuery = "SELECT count(*) FROM `auth-system-brukere` WHERE brukernavn = ? LIMIT 1";
   $brukernavnEksisterer = $tilkobling->prepare($brukernavnEksistererQuery);
   $brukernavnEksisterer->execute(array($brukernavn));
-  if ($brukernavnEksisterer->fetchColumn() ? 'true' : 'false') {
+  $eksistens = $brukernavnEksisterer->fetchAll(PDO::FETCH_ASSOC);
+
+  if (empty($eksistens)) {
     // Lagrer passord som et resultat av bcrypt hashing-algoritme.
     $passord = password_hash($_POST["r_passord"], PASSWORD_BCRYPT);
     $sql = "INSERT INTO `auth-system-brukere`(brukernavn, passord) VALUES ('$brukernavn', '$passord')";

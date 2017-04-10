@@ -26,7 +26,9 @@ $passordSpoerring = password_verify($faktisk_passord, $sql_passord[0]);
 
 // Sjekker om hash stemmer overrens med passord.
 if ($passordSpoerring) {
-    echo "Du er nå logget inn!";
+    session_start();
+    $_SESSION['brukernavn'] = $brukernavn;
+    header("location: portal.php");
 }
 
 // Feil passord

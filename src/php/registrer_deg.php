@@ -1,14 +1,13 @@
 <?php
-
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "auth-system";
 $tilkobling = new PDO("mysql:host=$servername;dbname=$dbname", "$username", "$password");
 
-if (isset($_POST["r_brukernavn"]) && isset($_POST["r_passord"])) {
+if (empty($_POST["r_brukernavn"]) && empty($_POST["r_passord"])) {
   $brukernavn = $_POST["r_brukernavn"];
-  $brukernavnEksistererQuery = "SELECT count(*) FROM `auth-system-brukere` WHERE brukernavn = ? LIMIT 1";
+  $brukernavnEksistererQuery = "SELECT * FROM `auth-system-brukere` WHERE brukernavn = ? LIMIT 1";
   $brukernavnEksisterer = $tilkobling->prepare($brukernavnEksistererQuery);
   $brukernavnEksisterer->execute(array($brukernavn));
   $eksistens = $brukernavnEksisterer->fetchAll(PDO::FETCH_ASSOC);
@@ -23,7 +22,7 @@ if (isset($_POST["r_brukernavn"]) && isset($_POST["r_passord"])) {
     $tilkobling = null;
   }
 
-  else {
+  else if (empty($_POST["r_brukernavn"]) && empty($_POST["r_passord"])) {
     echo "Brukernavnet er opptatt. Prøv et annet.";
   }
 }

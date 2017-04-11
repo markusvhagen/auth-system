@@ -5,6 +5,7 @@ $username = "root";
 $password = "";
 $dbname = "auth-system";
 $tilkobling = new PDO("mysql:host=$servername;dbname=$dbname", "$username", "$password");
+
 $brukernavn = $_REQUEST['q'];
 $brukernavnEksistererQuery = "SELECT brukernavn FROM `auth-system-brukere` WHERE brukernavn = ?";
 $brukernavnEksisterer = $tilkobling->prepare($brukernavnEksistererQuery);

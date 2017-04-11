@@ -1,25 +1,42 @@
-var meny = document.getElementById("meny");
+/* (de)aktivere meny */
+var meny_profil = document.getElementById("meny_profil");
+var bruker_knapp = document.getElementById("profil");
+var opp = document.getElementById("opp");
+var ned = document.getElementById("ned");
 var profil = false;
-var bruker = document.getElementById("profil");
-var meny1 = document.getElementById("meny_1");
-var meny2 = document.getElementById("meny_2");
-var meny3 = document.getElementById("meny_3");
 
-bruker.onclick = function() {
+bruker_knapp.onclick = function() {
   if (!profil) {
-    meny.style.background = "#e74c3c";
-    meny3.innerHTML = "Logg ut";
-    meny2.innerHTML = "Innstillinger";
-    meny1.innerHTML = "Endre profil";
+    meny_profil.className = "fadein";
+    opp.className = "fadein";
+    ned.className = "fadeout";
     profil = true;
-    console.log("Profil false")
   }
   else if (profil) {
-    meny.style.background = "#2980b9";
-    meny3.innerHTML = "Element 3";
-    meny2.innerHTML = "Element 2";
-    meny1.innerHTML = "Element 1";
+    meny_profil.className = "fadeout";
+    opp.className = "fadeout";
+    ned.className = "fadein";
     profil = false;
-    console.log("Profil true")
   }
+};
+
+/* XMLHttp-forespørsel for logg ut */
+var loggut = "true";
+var loggut_knapp = document.getElementById("loggut");
+var mottatt;
+
+loggut_knapp.onclick = function () {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      mottatt = this.responseText;
+    }
+    // Rar bug her, ved å printe hele this.responseText kommer hele koden tilbake.
+    // Tar derfor første index av motatt streng, som er suksess (...), altså "s"
+    if (mottatt[0] == "s") {
+      window.location.href = "../index.php";
+    }
+  }
+  xhttp.open("GET", "../php/portal.php?q="+loggut, true);
+  xhttp.send();
 };

@@ -5,7 +5,7 @@ $password = "";
 $dbname = "auth-system";
 $tilkobling = new PDO("mysql:host=$servername;dbname=$dbname", "$username", "$password");
 
-if (empty($_POST["r_brukernavn"]) && empty($_POST["r_passord"])) {
+if (isset($_POST["r_brukernavn"]) && isset($_POST["r_passord"])) {
   $brukernavn = $_POST["r_brukernavn"];
   $brukernavnEksistererQuery = "SELECT * FROM `auth-system-brukere` WHERE brukernavn = ? LIMIT 1";
   $brukernavnEksisterer = $tilkobling->prepare($brukernavnEksistererQuery);

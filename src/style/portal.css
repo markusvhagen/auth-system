@@ -17,6 +17,13 @@
   animation: fadeout 1s both;
 }
 
+#opp {
+  opacity: 0;
+}
+
+#ned {
+  opacity: 1;
+}
 
 /* STIL */
 
@@ -45,7 +52,7 @@ body {
   float: right;
   color: #f2f2f2;
   text-align: center;
-  padding: 6px 16px;
+  padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
   color: white;
@@ -64,15 +71,54 @@ body {
     cursor: pointer;
 }
 
+#meny a:hover {
+  background-color: #3498db;
+}
+
 #meny a:first-child {
   float: right;
-  padding-right: 4%;
+  margin-right: 4%;
 }
 
-#opp {
-  opacity: 0;
+#legg_ut_post {
+  float: left;
+  display: block;
+  margin-left: 11%;
+  width: 34%;
+  height: 70%;
 }
 
-#ned {
-  opacity: 1;
+#legg_ut_post h3, h4,
+#post_oversikt h3 {
+  text-align: center;
+}
+
+#legg_ut_post input {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#legg_ut_post textarea {
+  resize: vertical;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#post_oversikt {
+  float: right;
+  display: block;
+  margin-right: 11%;
+  width: 34%;
+  height: 500px;
+  overflow-y: scroll;
+}
+
+.enkel_post {
+  width: 90%;
+  border-bottom: 2px dashed #3498db;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }

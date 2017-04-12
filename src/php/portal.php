@@ -1,4 +1,6 @@
 <?php
+// Europa/Oslo er standard tidssone. Denne skal man kunne endre i innstillinger.php.
+date_default_timezone_set('Europe/Oslo');
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -23,6 +25,15 @@ if ($loggut == "true") {
   echo "suksess";
   session_destroy();
 }
+
+/* Videresende noen sessions-verdier til nypost.php */
+$brukeridQuery = "SELECT brukerid FROM `auth-system-brukere` WHERE brukernavn = ?";
+$brukeridRequest = $tilkobling->prepare($brukeridQuery);
+$brukeridRequest->execute(array($brukernavn));
+$brukerid = $brukeridRequest->fetchAll(PDO::FETCH_ASSOC);
+$brukerid = array_values($brukerid[0]);
+$brukerid = strval($brukerid[0]);
+$_SESSION['brukerid'] = $brukerid;
 
 /* Hente poster */
 $hentePosterQuery = "SELECT `auth-system-brukere`.`brukernavn`, `auth-system-post`.`post`, `auth-system-post`.`tid`
@@ -55,8 +66,8 @@ $resultat = $tilkobling->query($hentePosterQuery);
 
    <div id="legg_ut_post">
     <h3>Legg ut post (maks 200 tegn)</h3>
-    <form>
-    <textarea rows=5 cols=50>
+    <form action="nypost.php" method="post" accept-charset="UTF-8">
+    <textarea name="tekst" rows=5 cols=50>
     </textarea>
     <br><br>
     <input type="submit" value="Legg ut"></input>
@@ -75,7 +86,7 @@ $resultat = $tilkobling->query($hentePosterQuery);
           $tid = strtotime($rad["tid"]);
           $formatert_tid = date('d. F h:i', $tid);
           print_r("<br><div class='enkel_post'");
-          print_r("<p>" . utf8_encode($rad["post"]) . "<br><br>");
+          print_r("<p>" . $rad["post"] . "<br><br>");
           print_r("<b>" . utf8_encode($rad["brukernavn"]) . " | " . $formatert_tid . "</b></p>");
           print_r("</div>");
         }

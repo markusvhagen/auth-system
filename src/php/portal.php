@@ -1,13 +1,11 @@
 <?php
-// Europa/Oslo er standard tidssone. Denne skal man kunne endre i innstillinger.php.
-date_default_timezone_set('Europe/Oslo');
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "auth-system";
-$tilkobling = new PDO("mysql:host=$servername;dbname=$dbname", "$username", "$password");
+
+require("database/tilkobling.php");
 
 error_reporting(E_ALL & ~E_NOTICE);
+
+// Europa/Oslo er standard tidssone. Denne skal man kunne endre i innstillinger.php.
+date_default_timezone_set('Europe/Oslo');
 
 /* FOR SESSION */
 session_start();
@@ -66,7 +64,7 @@ $resultat = $tilkobling->query($hentePosterQuery);
 
    <div id="legg_ut_post">
     <h3>Legg ut post (maks 200 tegn)</h3>
-    <form action="nypost.php" method="post" accept-charset="UTF-8">
+    <form action="scripts/nypost.php" method="post" accept-charset="UTF-8">
     <textarea name="tekst" rows=5 cols=50>
     </textarea>
     <br><br>

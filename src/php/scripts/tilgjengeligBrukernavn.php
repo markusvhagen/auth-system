@@ -1,10 +1,6 @@
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "auth-system";
-$tilkobling = new PDO("mysql:host=$servername;dbname=$dbname", "$username", "$password");
+require("database/tilkobling.php");
 
 $brukernavn = $_REQUEST['q'];
 $brukernavnEksistererQuery = "SELECT brukernavn FROM `auth-system-brukere` WHERE brukernavn = ?";

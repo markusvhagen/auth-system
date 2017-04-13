@@ -1,11 +1,6 @@
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "auth-system";
-$tilkobling = new PDO("mysql:host=$servername;dbname=$dbname", "$username", "$password");
-$tilkobling->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+require("../database/tilkobling.php");
 
 session_start();
 // Array -> Streng
@@ -19,5 +14,5 @@ $nyPostRequest->bindParam('tid', $tid_naa, PDO::PARAM_STR);
 $nyPostRequest->bindParam('brukerid', $brukerid, PDO::PARAM_STR);
 $nyPostRequest->execute();
 
-header("location: portal.php")
+header("location: ../portal.php")
 ?>

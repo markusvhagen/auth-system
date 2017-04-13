@@ -1,9 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "auth-system";
-$tilkobling = new PDO("mysql:host=$servername;dbname=$dbname", "$username", "$password");
+require("database/tilkobling.php");
 
 if (isset($_POST["r_brukernavn"]) && isset($_POST["r_passord"])) {
   $brukernavn = $_POST["r_brukernavn"];

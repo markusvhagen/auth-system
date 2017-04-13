@@ -22,7 +22,7 @@ function tilgjengeligBrukernavn(str) {
       }
 
     };
-    xmlhttp.open("GET", "../src/php/tilgjengeligBrukernavn.php?q="+str, true);
+    xmlhttp.open("GET", "../src/php/scripts/tilgjengeligBrukernavn.php?q="+str, true);
     xmlhttp.send();
   }
 

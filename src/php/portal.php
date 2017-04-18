@@ -24,7 +24,7 @@ if ($loggut == "true") {
   session_destroy();
 }
 
-/* Videresende noen sessions-verdier til nypost.php */
+/* Finne brukerid til innlogget bruker */
 $brukeridQuery = "SELECT brukerid FROM `auth-system-brukere` WHERE brukernavn = ?";
 $brukeridRequest = $tilkobling->prepare($brukeridQuery);
 $brukeridRequest->execute(array($brukernavn));
@@ -47,6 +47,7 @@ $resultat = $tilkobling->query($hentePosterQuery);
     <meta charset="utf-8">
     <title>Portalen</title>
     <link href="../style/portal.css" type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
   <body>
 
@@ -63,7 +64,7 @@ $resultat = $tilkobling->query($hentePosterQuery);
      <a>Endre profil</a>
    </div>
 
-   <div id="legg_ut_post">
+   <div id="legg_ut_post_og_mine_venner">
     <h3>Legg ut post (maks 200 tegn)</h3>
     <form action="scripts/nypost.php" method="post" accept-charset="UTF-8">
     <textarea name="tekst" rows=5 cols=50>
@@ -72,9 +73,52 @@ $resultat = $tilkobling->query($hentePosterQuery);
     <input type="submit" value="Legg ut"></input>
     </form>
     <br>
-    <h4>Siste commits til koden på GitHub</h4>
-    <iframe src="http://tylerlh.github.com/github-latest-commits-widget/?username=markusvhagen&repo=auth-system&limit=10"
-  allowtransparency="true" frameborder="0" scrolling="no" width="502px" height="252px"></iframe>
+    <h3>Mine kontakter</h3>
+    <div id="kontakter">
+        <div class="enkel_kontakt">
+            <div class="kontakt_bilde">
+                <img src="https://markusvhagen.github.io/images/markus.png"></img>
+            </div>
+
+            <div class="kontakt_tekst">
+                <h4>Markus Valås Hagen (admin)</h4>
+                <h5 style="color:#2ecc71">Pålogget</h5>
+            </div>
+
+            <div id="usynlig_strek"></div>
+
+        </div>
+
+        <div class="enkel_kontakt">
+            <div class="kontakt_bilde">
+                <img src="http://static4.businessinsider.com/image/56c640526e97c625048b822a-480/donald-trump.jpg"></img>
+            </div>
+
+            <div class="kontakt_tekst">
+                <h4>Donald Trump</h4>
+                <h5 style="color:#2ecc71">Pålogget</h5>
+            </div>
+
+            <div id="usynlig_strek"></div>
+
+        </div>
+
+        <div class="enkel_kontakt">
+            <div class="kontakt_bilde">
+                <img src="https://lh3.googleusercontent.com/lviuiKeKp3sfoMWnVyxkkM6WFvetT7XOMwH0qoZMDRmLChh_skg"></img>
+            </div>
+
+            <div class="kontakt_tekst">
+                <h4>Elon Musk</h4>
+                <h5 style="color:#c0392b">Avlogget</h5>
+            </div>
+
+            <div id="usynlig_strek"></div>
+
+        </div>
+
+    </div>
+
    </div>
 
    <div id="post_oversikt">

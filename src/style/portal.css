@@ -28,6 +28,7 @@
 /* STIL */
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Lato');
 
 body {
   margin: 0 !important;
@@ -80,7 +81,7 @@ body {
   margin-right: 4%;
 }
 
-#legg_ut_post {
+#legg_ut_post_og_mine_venner {
   float: left;
   display: block;
   margin-left: 11%;
@@ -88,18 +89,18 @@ body {
   height: 70%;
 }
 
-#legg_ut_post h3, h4,
+#legg_ut_post_og_mine_venner h3, h4,
 #post_oversikt h3 {
   text-align: center;
 }
 
-#legg_ut_post input {
+#legg_ut_post_og_mine_venner input {
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
 
-#legg_ut_post textarea {
+#legg_ut_post_og_mine_venner textarea {
   resize: vertical;
   display: block;
   margin-left: auto;
@@ -115,10 +116,60 @@ body {
   overflow-y: scroll;
 }
 
+#kontakter {
+    overflow-y: scroll;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 400px;
+    width: 78%;
+}
+
+#kontakter h4 {
+    text-align: left;
+}
+
+#usynlig_strek {
+    clear: both;
+}
+
 .enkel_post {
-  width: 90%;
   border-bottom: 2px dashed #3498db;
   display: block;
   margin-left: auto;
   margin-right: auto;
+  text-align: left;
+}
+
+.enkel_kontakt {
+    width: 90%;
+    background-color: #ecf0f1;
+    border: 2px solid #7f8c8d;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    font-family: 'Lato', sans-serif;
+}
+
+.kontakt_tekst {
+    float: left;
+    padding-left: 15px;
+}
+
+.kontakt_tekst h4 {
+    font-size: 20px;
+}
+
+.kontakt_tekst h5 {
+    font-size: 14px;
+}
+
+.kontakt_bilde {
+    float: left;
+}
+
+.kontakt_bilde img {
+    height: 150px;
+    width: 140px;
 }

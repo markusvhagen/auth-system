@@ -36,7 +36,8 @@ $_SESSION['brukerid'] = $brukerid;
 /* Hente poster */
 $hentePosterQuery = "SELECT `auth-system-brukere`.`brukernavn`, `auth-system-post`.`post`, `auth-system-post`.`tid`
 FROM `auth-system-brukere`
-RIGHT JOIN `auth-system-post` ON `auth-system-brukere`.`brukerid` = `auth-system-post`.`brukerid`";
+RIGHT JOIN `auth-system-post` ON `auth-system-brukere`.`brukerid` = `auth-system-post`.`brukerid`
+ORDER BY `auth-system-post`.`postid` DESC";
 $resultat = $tilkobling->query($hentePosterQuery);
 ?>
 

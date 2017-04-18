@@ -11,9 +11,11 @@ if (isset($_POST["r_brukernavn"]) && isset($_POST["r_passord"])) {
   if (empty($eksistens)) {
     // Lagrer passord som et resultat av bcrypt hashing-algoritme.
     $passord = password_hash($_POST["r_passord"], PASSWORD_BCRYPT);
-    $sql = "INSERT INTO `auth-system-brukere`(brukernavn, passord) VALUES ('$brukernavn', '$passord')";
-
-    $tilkobling->query($sql);
+    $sql = "INSERT INTO `auth-system-brukere`(brukernavn, passord) VALUES (:brukernavn, :passord)";
+    $query = $tilkobling->prepare($sql);
+    $query->bindParam('brukernavn', $brukernavn, PDO::PARAM_STR);
+    $query->bindParam('passord', $passord, PDO::PARAM_STR);
+    $query->execute();
     echo "Registrering fullført. Velkommen!";
     $tilkobling = null;
   }

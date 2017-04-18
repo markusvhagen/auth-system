@@ -1,6 +1,6 @@
 <?php
 
-require("database/tilkobling.php");
+require("../database/tilkobling.php");
 
 $brukernavn = $_REQUEST['q'];
 $brukernavnEksistererQuery = "SELECT brukernavn FROM `auth-system-brukere` WHERE brukernavn = ?";

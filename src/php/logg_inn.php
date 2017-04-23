@@ -19,7 +19,7 @@ if (empty($sql_passord)) {
 $sql_passord = array_values($sql_passord[0]);
 $passordSpoerring = password_verify($faktisk_passord, $sql_passord[0]);
 
-// Sjekker om hash stemmer overrens med passord. 
+// Sjekker om hash stemmer overrens med passord.
 if ($passordSpoerring) {
     session_start();
     $_SESSION['brukernavn'] = $brukernavn;

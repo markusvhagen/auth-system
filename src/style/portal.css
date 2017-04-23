@@ -81,7 +81,7 @@ body {
   margin-right: 4%;
 }
 
-#legg_ut_post_og_mine_venner {
+#legg_ut_post {
   float: left;
   display: block;
   margin-left: 11%;
@@ -89,18 +89,18 @@ body {
   height: 70%;
 }
 
-#legg_ut_post_og_mine_venner h3, h4,
+#legg_ut_post h3, h4,
 #post_oversikt h3 {
   text-align: center;
 }
 
-#legg_ut_post_og_mine_venner input {
+#legg_ut_post input {
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
 
-#legg_ut_post_og_mine_venner textarea {
+#legg_ut_post textarea {
   resize: vertical;
   display: block;
   margin-left: auto;
@@ -172,4 +172,14 @@ body {
 .kontakt_bilde img {
     height: 150px;
     width: 140px;
+}
+
+
+/* PROFIL.PHP */
+#endre_bilde {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding-top: 100px;
 }

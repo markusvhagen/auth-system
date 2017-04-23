@@ -5,7 +5,8 @@ require("../database/tilkobling.php");
 session_start();
 // Array -> Streng
 $brukerid = $_SESSION['brukerid'];
-$tekst = utf8_encode(utf8_decode($_POST["tekst"]));
+// Unngår med denne cross-site-scripting
+$tekst = $tilkobling->quote($_POST["tekst"]);
 $tid_naa = date('Y-m-d G:i:s');
 $nyPostQuery = "INSERT INTO `auth-system-post` (`post`, `tid`, `brukerid`) VALUES (:tekst, :tid, :brukerid)";
 $nyPostRequest = $tilkobling->prepare($nyPostQuery);

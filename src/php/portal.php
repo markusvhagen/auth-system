@@ -60,74 +60,29 @@ $resultat = $tilkobling->query($hentePosterQuery);
 
    <div id="meny_profil">
      <a id="loggut">Logg ut</a>
-     <a>Innstillinger</a>
-     <a>Endre profil</a>
+     <a href="profil.php">Endre bilde</a>
    </div>
 
-   <div id="legg_ut_post_og_mine_venner">
-    <h3>Legg ut post (maks 200 tegn)</h3>
+   <div id="legg_ut_post">
+    <h3>Legg ut post (max 200 tegn)</h3>
     <form action="scripts/nypost.php" method="post" accept-charset="UTF-8">
     <textarea name="tekst" rows=5 cols=50>
     </textarea>
     <br><br>
-    <input type="submit" value="Legg ut"></input>
+    <input type="submit" value="Send"></input>
     </form>
     <br>
-    <h3>Mine kontakter</h3>
-    <div id="kontakter">
-        <div class="enkel_kontakt">
-            <div class="kontakt_bilde">
-                <img src="https://markusvhagen.github.io/images/markus.png"></img>
-            </div>
 
-            <div class="kontakt_tekst">
-                <h4>Markus Valås Hagen (admin)</h4>
-                <h5 style="color:#2ecc71">Pålogget</h5>
-            </div>
-
-            <div id="usynlig_strek"></div>
-
-        </div>
-
-        <div class="enkel_kontakt">
-            <div class="kontakt_bilde">
-                <img src="http://static4.businessinsider.com/image/56c640526e97c625048b822a-480/donald-trump.jpg"></img>
-            </div>
-
-            <div class="kontakt_tekst">
-                <h4>Donald Trump</h4>
-                <h5 style="color:#2ecc71">Pålogget</h5>
-            </div>
-
-            <div id="usynlig_strek"></div>
-
-        </div>
-
-        <div class="enkel_kontakt">
-            <div class="kontakt_bilde">
-                <img src="https://lh3.googleusercontent.com/lviuiKeKp3sfoMWnVyxkkM6WFvetT7XOMwH0qoZMDRmLChh_skg"></img>
-            </div>
-
-            <div class="kontakt_tekst">
-                <h4>Elon Musk</h4>
-                <h5 style="color:#c0392b">Avlogget</h5>
-            </div>
-
-            <div id="usynlig_strek"></div>
-
-        </div>
-
-    </div>
 
    </div>
 
    <div id="post_oversikt">
-     <h3>Oversikt over poster</h3>
+     <h3>Nyeste spørsmål</h3>
      <?php
 
         while($rad = $resultat->fetch(PDO::FETCH_ASSOC)) {
           $tid = strtotime($rad["tid"]);
-          $formatert_tid = date('d. F h:i', $tid);
+          $formatert_tid = date('d. F G:i', $tid);
           print_r("<br><div class='enkel_post'");
           print_r("<p>" . $rad["post"] . "<br><br>");
           print_r("<b>" . utf8_encode($rad["brukernavn"]) . " | " . $formatert_tid . "</b></p>");
